@@ -3,6 +3,7 @@ import LoadingText from './loading-text';
 
 interface AudioAnalyzerProps {
   uploadedAudioData: any;
+  location: { id: number, name?: string, description?: string } | null;
 }
 
 const Steps = [
@@ -99,6 +100,20 @@ const AudioAnalyzer = ({
     });
     const data = await response.json();
     setNormalOrAbnormalLoading(false);
+    return data;
+  }
+
+  const identifyHeartSound = async (audioData: any) => {
+    const locationText = location ? location.name + location.description : "unknown";
+
+    const response = await fetch(`${apiURL}/identify_heart_sound`, {
+      method: "POST",
+      body: JSON.stringify({ ...audioData, location: locationText }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
     return data;
   }
 

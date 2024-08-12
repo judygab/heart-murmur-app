@@ -96,7 +96,7 @@ export default function Page() {
               Please wait</> : <><Activity className="mr-2 h-4 w-4" />
               Analyze Audio</>}</Button>
         </div>
-        {uploadedAudioData ? <AudioAnalyzer uploadedAudioData={uploadedAudioData} /> : null}
+        {uploadedAudioData ? <AudioAnalyzer uploadedAudioData={uploadedAudioData} location={site} /> : null}
       </div>
     </>
   );

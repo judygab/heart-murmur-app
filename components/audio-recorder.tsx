@@ -4,6 +4,7 @@ import { useVoiceVisualizer, VoiceVisualizer } from "react-voice-visualizer";
 import { Button } from "@/components/ui/button";
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { Upload } from "lucide-react";
 
 export const AudioRecorder = ({ onAudioUpload }: {
   onAudioUpload: (blob: Blob) => void;
@@ -88,9 +89,12 @@ export const AudioRecorder = ({ onAudioUpload }: {
 
   return (
     <>
-      <Button className="controls__input-file" onClick={handleClickInputFile}>
-        Upload Audio
-      </Button>
+      <div className="flex items-center justify-center">
+        <Button className="controls__input-file" onClick={handleClickInputFile}>
+          <Upload className="mr-2" />
+          Upload Audio
+        </Button>
+      </div>
       <input
         ref={hiddenFileInputRef}
         type="file"

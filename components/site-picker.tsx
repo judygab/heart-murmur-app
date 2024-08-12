@@ -56,7 +56,7 @@ const heartMurmurLocations = {
     {
       id: 4,
       name: "Erb’s Point",
-      description: "3rd intercostal space at the left sternal edge"
+      description: "3rd intercostal space at the left sternal edge, Left lower sternal border"
     },
     {
       id: 5,
