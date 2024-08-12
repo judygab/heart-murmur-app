@@ -1,7 +1,7 @@
 import { NavbarMobile } from "@/components/navbar/navbar-mobile";
 import { NavbarUserLinks } from "@/components/navbar/navbar-user-links";
 import { buttonVariants } from "@/components/ui/button";
-import { FishIcon, ScanTextIcon } from "lucide-react";
+import { Stethoscope, ScanTextIcon } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -13,9 +13,9 @@ export const NavBar: FC = () => {
           <div className="flex items-center">
             <Link href="/" className="hover:opacity-80 transition-opacity">
               <div className="flex items-center">
-                <FishIcon className="w-8 h-8 mr-2 inline" />{" "}
-                <span className="text-xl font-semibold tracking-tighter text-slate-800 mr-6">
-                  Venefish
+                <Stethoscope className="w-8 h-8 mr-2 inline text-red-500" />{" "}
+                <span className="text-xl font-semibold tracking-tighter text-white mr-6">
+                  Cardio <span className="text-red-500">AI</span>
                 </span>
               </div>
             </Link>
@@ -30,9 +30,6 @@ export const NavBar: FC = () => {
                 <Link href="#3" className={buttonVariants({ variant: "link" })}>
                   Item 3
                 </Link>
-              </div>
-              <div className="flex items-center space-x-4">
-                <NavbarUserLinks />
               </div>
             </div>
             <div className="grow md:hidden flex justify-end">

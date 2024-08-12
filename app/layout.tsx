@@ -5,22 +5,33 @@ import { cn } from "@/lib/utils";
 import { MyFirebaseProvider } from "@/components/firebase-providers";
 import { Toaster } from "@/components/ui/toaster";
 import { ReactNode } from "react";
+import { ThemeProvider } from "@/components/theme-provider"
+import { NavBar } from "@/components/navbar/navbar";
+
 
 const font = Work_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Venefish | Vercel Next.JS Firebase Shadcn/ui Tailwind Boilerplate",
+  title: "Cardio App",
   description:
-    "Venefish is a Vercel Next.JS Firebase Shadcn/ui Tailwind Boilerplate project to help you get started with your next project.",
+    "Determine heart murmur type, severity, and location using machine learning.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={cn(font.className)}>
+        <NavBar />
         <MyFirebaseProvider>
-          {children}
-          <Toaster />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
         </MyFirebaseProvider>
       </body>
     </html>
