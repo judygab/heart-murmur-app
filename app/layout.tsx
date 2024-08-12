@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ReactNode } from "react";
 import { ThemeProvider } from "@/components/theme-provider"
 import { NavBar } from "@/components/navbar/navbar";
+import NoSSRWrapper from "./NoSSRWrapper";
 
 
 const font = Work_Sans({ subsets: ["latin"] });
@@ -29,8 +30,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-            <Toaster />
+            <NoSSRWrapper>
+              {children}
+              <Toaster />
+            </NoSSRWrapper>
           </ThemeProvider>
         </MyFirebaseProvider>
       </body>
