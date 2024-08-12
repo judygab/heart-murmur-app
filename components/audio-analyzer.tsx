@@ -48,10 +48,12 @@ const AudioAnalyzer = ({
     // setProcessedAudioData(data);
     const visualsData = await plotVisuals(data);
     console.log("visuals", visualsData);
-    const noiseData = await isNoiseOrHeartSound({ ...data, ...visualsData });
+    const noiseData = await isNoiseOrHeartSound({ ...uploadedAudioData, ...visualsData });
     console.log("noise", noiseData);
     setNoiseOrHeartbeat(noiseData);
-    if (noiseData === "type: artifact \n") return;
+    if (noiseData === "type: artifact \n" || noiseData === "[artifact] \n") {
+      return;
+    }
     const normalData = await isNormalOrAbnormal({ ...data, ...visualsData });
     setNormalOrAbnormal(normalData);
     console.log("normal", normalData);
@@ -101,20 +103,27 @@ const AudioAnalyzer = ({
   }
 
   useEffect(() => {
+    if (noiseOrHeartbeat) {
+      // reset the state
+      setNoiseOrHeartbeat(undefined);
+      setNoiseOrHearbeatLoading(null);
+      setVisualsLoading(null);
+      setNormalOrAbnormalLoading(null);
+      setNormalOrAbnormal(undefined);
+    }
     const callProcessAudio = async () => {
       await processAudio();
     };
     callProcessAudio();
-  }, []);
+  }, [uploadedAudioData]);
 
   return (
     <div className="bg-black rounded-md p-3 text-xl leading-7">
       <h1>Audio Analyzer</h1>
-      {/* <button onClick={processAudio}>Process Audio</button> */}
       <LoadingText isLoading={processing} loadingText="Processing audio..." finishedText="Audio processed!" />
       <LoadingText isLoading={visualsLoading} loadingText="Plotting Visuals..." finishedText="Plotting Visuals... Done!" finishedTextClassName="text-green-500" />
-      <LoadingText isLoading={noiseOrHearbeatLoading} loadingText="Checking for noise or heartbeat..." finishedText={`The sound is${noiseOrHeartbeat}`} finishedTextClassName="text-blue-500" />
-      <LoadingText isLoading={normalOrAbnormalLoading} loadingText="Determining if the heartbeat is normal or abnormal..." finishedText={`The heartbeat is ${normalOrAbnormal}`} finishedTextClassName={normalOrAbnormal === "[normal] \n" ? "text-green-500" : "text-red-500"} />
+      <LoadingText isLoading={noiseOrHearbeatLoading} loadingText="Checking for noise or heartbeat..." finishedText={(noiseOrHeartbeat === "type: artifact \n" || noiseOrHeartbeat === "[artifact] \n") ? "Please re-upload a better quality audio" : `The sound is${noiseOrHeartbeat}`} finishedTextClassName={(noiseOrHeartbeat === "type: artifact \n" || noiseOrHeartbeat === "[artifact] \n") ? "text-red-500" : "text-blue-500"} />
+      <LoadingText isLoading={normalOrAbnormalLoading} loadingText="Determining if the heartbeat is normal or abnormal..." finishedText={`The heartbeat is ${normalOrAbnormal}`} finishedTextClassName={(normalOrAbnormal === "[normal] \n" || normalOrAbnormal === "type: normal \n") ? "text-green-500" : "text-red-500"} />
     </div>
   );
 }

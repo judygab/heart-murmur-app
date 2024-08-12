@@ -65,6 +65,10 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
+
+.voice-visualizer__btn {
+  background-color: hsl(var(--primary-foreground)) !important;
+}
  
 @layer base {
   * {

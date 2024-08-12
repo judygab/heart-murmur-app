@@ -84,7 +84,6 @@ export default function Page() {
 
   return (
     <>
-      <ModeToggle />
       <div className="grid grid-cols-2 gap-4">
         <div className="grow flex flex-col items-center justify-evenly">
           <div className="w-[500px]">

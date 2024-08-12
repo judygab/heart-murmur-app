@@ -8,6 +8,7 @@ import { ReactNode } from "react";
 import { ThemeProvider } from "@/components/theme-provider"
 import { NavBar } from "@/components/navbar/navbar";
 import NoSSRWrapper from "./NoSSRWrapper";
+import { Footer } from "@/components/footer";
 
 
 const font = Work_Sans({ subsets: ["latin"] });
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={cn(font.className)}>
+      <body className={cn(font.className, "dark")}>
         <NavBar />
         <MyFirebaseProvider>
           <ThemeProvider
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </NoSSRWrapper>
           </ThemeProvider>
         </MyFirebaseProvider>
+        <Footer />
       </body>
     </html>
   );
